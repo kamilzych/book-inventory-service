@@ -1,8 +1,8 @@
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://localhost:27017/book_inventory_store';
+var url = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/book_inventory_store';
 
 var collectionPromise = MongoClient.connect(url).then(function (db) {
-    return db.collection('books');
+    return db.collection('books_zych');
 });
 
 module.exports = {
