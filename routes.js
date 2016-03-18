@@ -26,7 +26,14 @@ module.exports = function (repository) {
             repository.getCount(req.params.isbn)
                 .then(function (result) {
                     if (result !== null) {
-                        res.status(200).json({count: result});
+                        res.format({
+                            html: function () {
+                                res.send('<div class="copiesLeft">' + result + '</div>')
+                            },
+                            json: function () {
+                                res.status(200).json({count: result});
+                            }
+                        });
                     } else {
                         res.status(404).json({error: 'Error. No such ISBN'});
                     }
